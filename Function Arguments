@@ -1,0 +1,39 @@
+void swap_by_pointers(int *ptrM, int *ptrN)
+{
+	int temp;
+	temp = *ptrM;
+	*ptrM = *ptrN;
+	*ptrN = temp;
+}
+
+void swap_by_value(int ptrM, int ptrN)
+{
+	int temp;
+	temp = ptrM;
+	ptrM = ptrN;
+	ptrN = temp;
+}
+
+void swap_by_reference(int &m, int &n)
+{
+	int temp;
+	temp = m;
+	m = n;
+	n = temp;
+}
+
+int main()
+{
+	int m = 5; int n = 9;
+	cout << "before swap m: " << m << endl;
+	cout << "before swap n: " << n << endl;
+
+	swap_by_pointers(&m, &n);
+	swap_by_value(m, n);
+	swap_by_reference(m, n);
+
+	cout << "after swap m: " << m << endl;
+	cout << "after swap n: " << n << endl;
+
+  return 0;
+}
