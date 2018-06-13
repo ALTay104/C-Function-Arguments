@@ -1,3 +1,18 @@
+double getAverage(int arr[], int size)
+{
+	int i, sum = 0;
+	double avg;
+
+	for (i = 0; i < size; ++i)
+	{
+		cout << "current value is: " << arr[i] << endl;
+	}
+
+	avg = double(sum) / size;
+
+	return avg;
+}
+
 void swap_by_pointers(int *ptrM, int *ptrN)
 {
 	int temp;
@@ -5,7 +20,6 @@ void swap_by_pointers(int *ptrM, int *ptrN)
 	*ptrM = *ptrN;
 	*ptrN = temp;
 }
-
 void swap_by_value(int ptrM, int ptrN)
 {
 	int temp;
@@ -13,7 +27,6 @@ void swap_by_value(int ptrM, int ptrN)
 	ptrM = ptrN;
 	ptrN = temp;
 }
-
 void swap_by_reference(int &m, int &n)
 {
 	int temp;
@@ -21,19 +34,80 @@ void swap_by_reference(int &m, int &n)
 	m = n;
 	n = temp;
 }
-
-int main()
+void swaps_caller()
 {
+	//Call by Pointers, Value, Reference
 	int m = 5; int n = 9;
 	cout << "before swap m: " << m << endl;
 	cout << "before swap n: " << n << endl;
 
 	swap_by_pointers(&m, &n);
 	swap_by_value(m, n);
-	swap_by_reference(m, n);
+	swap_by_reference(m, n); //return values to m n
 
 	cout << "after swap m: " << m << endl;
 	cout << "after swap n: " << n << endl;
+}
 
-  return 0;
+int *myFunc(int *ptrB) //pointer type function, normally used to access array
+{
+	int k;
+	k = *ptrB + *ptrB;
+	*ptrB = k;
+	return (ptrB); //must return address to access it's content by caller
+}
+void myFunc_caller()
+{
+	//Function returning A Pointer
+	int *a, b;
+	b = 100;
+	a = myFunc(&b);//a is the name of the pointer. it's an address
+	cout << "value is: " << *a << endl; //* will point to the content of the address store in a. "dereferrencing 
+}
+
+int *processMarks(int n, int &minMark, int &maxMark)
+{
+	int *p;
+	p = new int[n];
+	if (p == NULL) { return NULL; }
+
+	cout << "Enter 5 marks" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> p[i]; 
+	}
+
+	maxMark , minMark = p[0];
+	for (int j = 0; j < n; j++)
+	{
+		if (p[j] > maxMark) { maxMark = p[j]; } //max mark
+		if (p[j] < minMark) { minMark = p[j]; } //min mark
+	}
+
+	return p; //RETURN ADDRESS of FIRST ARRAY. I think in C++, we cannot return whole array (it's tooo big)
+}
+void processMarks_caller()
+{
+	//Example of dynamically allocated memory
+	int student_size = 5, *min_max_marks, min_Mark, max_Mark;
+
+	min_max_marks = processMarks(student_size, min_Mark, max_Mark); //get the address of first array
+
+	for (int i = 0; i < student_size; i++)
+	{
+		cout << min_max_marks[i] << endl; //print out using array
+	}
+	cout << "Max marks is: " << min_Mark << endl;
+	cout << "Min Marks is: " << max_Mark << endl;
+
+	//must FREE_UP HEAP space!
+	if (min_max_marks != NULL) { delete[] min_max_marks; }
+}
+
+int main()
+{
+	swaps_caller();
+	processMarks_caller();
+
+    return 0;
 }
