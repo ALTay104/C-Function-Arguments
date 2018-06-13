@@ -1,0 +1,23 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+int *myFunc(int *ptrB) //pointer type function
+{
+	int k;
+	k = *ptrB + *ptrB;
+	*ptrB = k;
+	return (ptrB); //must return address to access it's content by caller
+}
+
+int main()
+{
+	//Function returning A Pointer
+	int *a, b;
+	b = 100;
+	a = myFunc(&b);//a is the name of the pointer. it's an address
+	cout << "value is: " << *a << endl; //* will point to the content of the address store in a. "dereferrencing 
+
+  return 0;
+}
+
