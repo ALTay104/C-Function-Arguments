@@ -1,0 +1,27 @@
+struct node
+{
+	int data;
+	node *next;
+};
+
+int main()
+{
+	node *n; node *t; node *h;
+
+	n = new node; //n is the starting address of object dynamic pointer n
+	n->data = 15;
+	t = n; //t is temporary pointer to store address for next
+	h = n; //t and h pointing to object n
+	cout << "address of first node is: " << n << endl;
+
+	n = new node; //pointing to new node
+	n->data = 20; 
+	t->next = n; //assign next on previous node to new node. "create link"
+	t = t->next; //after assigning the address of next node to previous node, move pointer t to next node
+
+	n = new node;
+	n->data = 25;
+	t->next = n; //t->next is still at current node
+	t = t->next; //t is now pointing to next node
+	n->next = NULL; //current node is the last element. Pointint to nothing.
+}
