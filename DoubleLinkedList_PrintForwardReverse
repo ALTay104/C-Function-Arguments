@@ -1,0 +1,81 @@
+#include "stdafx.h"
+#include "DoubleLinkedList.h"
+#include <iostream>
+using namespace std;
+
+typedef struct node {
+	int data;
+	node *next;
+	node *prev;
+} *nodePtr; //creating new type def call nodePtr
+
+nodePtr head; //point to front of doubly linkedlist
+nodePtr tail; //point to very end 
+nodePtr n;
+
+void PrintForward(node *head)
+{
+	node *temp;
+	temp = head; //set temp pointer to first node. 
+
+	while (temp != NULL)
+	{
+		cout << temp->data << " ";
+		temp = temp->next; //increment to next node
+	}
+	cout << endl;
+}
+
+void PrintReverse(node *tail)
+{
+	node *temp;
+	temp = tail; //set temp pointer to last node. 
+
+	while (temp != NULL)
+	{
+		cout << temp->data << " ";
+		temp = temp->prev; //increment to previous node
+	}
+	cout << endl;
+}
+
+DoubleLinkedList::DoubleLinkedList()
+{
+	head = NULL;
+	tail = NULL;
+}
+
+DoubleLinkedList::~DoubleLinkedList()
+{
+}
+
+int main()
+{
+	n = new node;
+	n->data = 10;
+	n->prev = NULL;
+	head = n;
+	tail = n;
+
+	n = new node;
+	n->data = 15;
+	n->prev = tail; //link 2nd node to previous
+	tail->next = n; //n is at 2nd node. tail is at 1st node
+	tail = n;
+
+	n = new node;
+	n->data = 20;
+	n->prev = tail; //link 2nd node to previous
+	tail->next = n; //n is at 2nd node. tail is at 1st node
+	tail = n;
+
+	n = new node;
+	n->data = 25;
+	n->prev = tail; //link 2nd node to previous
+	tail->next = n; //n is at 2nd node. tail is at 1st node
+	tail = n;
+	tail->next = NULL;
+
+	PrintForward(head);
+	PrintReverse(tail);
+}
