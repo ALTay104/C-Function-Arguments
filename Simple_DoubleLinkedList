@@ -1,0 +1,39 @@
+#include "stdafx.h"
+#include "DoubleLinkedList.h"
+#include <iostream>
+using namespace std;
+
+typedef struct node {
+	int data;
+	node *next;
+	node *prev;
+} *nodePtr; //creating new type def call nodePtr
+
+nodePtr head; //point to front of doubly linkedlist
+nodePtr tail; //point to very end 
+
+DoubleLinkedList::DoubleLinkedList()
+{
+	head = NULL;
+	tail = NULL;
+}
+
+DoubleLinkedList::~DoubleLinkedList()
+{
+}
+
+int main()
+{
+	nodePtr n = new node;
+	n->data = 10;
+	n->prev = NULL;
+	head = n;
+	tail = n;
+
+	nodePtr n = new node;
+	n->data = 15;
+	n->prev = tail; //link 2nd node to previous
+	tail->next = n; //n is at 2nd node. tail is at 1st node
+	tail = n;
+	tail->next = NULL;
+}
